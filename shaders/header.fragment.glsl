@@ -61,11 +61,11 @@ vec3 pseudo_symmetric ( float intensity, float center, float radius)
 vec3 pseudo ( float intensity, float min, float max )
 {
   vec3 color = vec3(0.0,0.0,0.0);
-  vec4 c0 = vec4(1.00, 0.76, 0.00, 0.0);
-  vec4 c1 = vec4(1.00, 0.34, 0.20, 0.2);
-  vec4 c2 = vec4(0.70, 0.00, 0.22, 0.4);
-  vec4 c3 = vec4(0.56, 0.05, 0.24, 0.6);
-  vec4 c4 = vec4(0.34, 0.09, 0.27, 0.8);
+  vec4 c0 = vec4(0.86, 0.15, 0.11, 0.0);
+  vec4 c1 = vec4(0.88, 0.36, 0.14, 0.2);
+  vec4 c2 = vec4(0.94, 0.73, 0.19, 0.4);
+  vec4 c3 = vec4(0.11, 0.69, 0.56, 0.6);
+  vec4 c4 = vec4(0.07, 0.25, 0.36, 0.8);
   vec4 c5 = vec4(0.07, 0.07, 0.07, 1.0);
 
   if(intensity < min){
@@ -117,10 +117,11 @@ void main( void )
 
   float t = iTime + 20.0;
   vec2 params = 
+    0.005 * vec2(sin(t * 2.0),cos(t * 2.0)) +
     vec2(-0.20, 0.70) + 
     vec2(sin(t * 0.26), cos(t * 0.2)) * vec2(0.02,-0.1) + 
-    mouse * 0.02 -
-    vec2(0.0,iScroll / iResolution.y);
+    mouse * 0.1;
+  params = mix(params,vec2(0.0,0.0),max(1.0/(1.0 + (iTime * iTime * iTime * 0.04)), iScroll / iResolution.y));
   vec2 julia = fractal(coord, params);
   // vec2 mandelbrot = fractal(vec2(0.0), coord);
   gl_FragColor = vec4(pseudo(length(julia), 0.0, 1.0), 1.0);
