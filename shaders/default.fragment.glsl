@@ -1,7 +1,5 @@
-precision highp float;
 uniform vec2 resolution;
 uniform float time;
-
 void main(void)
 {
   vec2 uv = gl_FragCoord.xy / resolution.xy;
