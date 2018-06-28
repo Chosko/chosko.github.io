@@ -1,4 +1,4 @@
-#define iterations 100
+#define iterations 30
 #define power 2
 
 uniform vec2 iResolution;
@@ -11,7 +11,8 @@ vec3 _pseudo_step ( vec4 a, vec4 b, float t)
   vec3 color = vec3(0.0,0.0,0.0);
   if(t >= a.a && t < b.a)
   {
-    color = mix(a.rgb, b.rgb, (t - a.a) / (b.a - a.a));
+    float s = step(0.5,(t - a.a) / (b.a - a.a));
+    color = s * a.rgb + (1.0 - s) * b.rgb;
   }
   return color;
 }
@@ -60,12 +61,12 @@ vec3 pseudo_symmetric ( float intensity, float center, float radius)
 vec3 pseudo ( float intensity, float min, float max )
 {
   vec3 color = vec3(0.0,0.0,0.0);
-  vec4 c0 = vec4(1.0,0.0,0.0,0.0);
-  vec4 c1 = vec4(0.2,0.2,1.0,0.2);
-  vec4 c2 = vec4(0.7,1.0,0.0,0.4);
-  vec4 c3 = vec4(0.0,1.0,0.3,0.6);
-  vec4 c4 = vec4(1.0,0.4,0.1,0.8);
-  vec4 c5 = vec4(0.07,0.07,0.07,1.0);
+  vec4 c0 = vec4(1.00, 0.76, 0.00, 0.0);
+  vec4 c1 = vec4(1.00, 0.34, 0.20, 0.2);
+  vec4 c2 = vec4(0.70, 0.00, 0.22, 0.4);
+  vec4 c3 = vec4(0.56, 0.05, 0.24, 0.6);
+  vec4 c4 = vec4(0.34, 0.09, 0.27, 0.8);
+  vec4 c5 = vec4(0.07, 0.07, 0.07, 1.0);
 
   if(intensity < min){
     return c0.rgb;
