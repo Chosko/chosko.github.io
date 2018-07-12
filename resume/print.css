@@ -16,10 +16,15 @@
 
 body, html {
   width: 100%;
+  height: 100%;
   background-color: white;
   padding-top: 1.5em;
-  font-size: 139%;
+  font-size: 16px;
   color:black;
+}
+
+body.phantomjs{
+  font-size: 16px;
 }
 
 .content-cat {
@@ -29,7 +34,6 @@ body, html {
 .paper {
   width:100%;
   border: 0;
-
   padding-top: 0;
 }
 
@@ -71,8 +75,6 @@ header p {
 .work-listing p {
   font-size: 0.7em;
 }
-
-
 
 .content-cat p {
   font-size:0.6em;
