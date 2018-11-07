@@ -1,10 +1,10 @@
-#define iterations 30
-#define power 2
+#define ITERATIONS 30
+#define POWER 2
 
 precision highp float;
 
 uniform vec2 u_resolution;
-uniform vec4 u_mouse;
+uniform vec2 u_mouse;
 uniform float u_time;
 
 vec3 _pseudo_step ( vec4 a, vec4 b, float t)
@@ -60,9 +60,9 @@ vec2 normalizeScreenCoords(in vec2 coords){
 
 vec2 fractal(in vec2 z0, in vec2 c){
   vec2 z = z0;
-  for(int i = 0; i < iterations; i++){
+  for(int i = 0; i < ITERATIONS; i++){
     vec2 cz = z;
-    for(int j = 1; j < power; j++){
+    for(int j = 1; j < POWER; j++){
       cz = cp(cz,z);
     }
     z = cz + c;
@@ -72,8 +72,8 @@ vec2 fractal(in vec2 z0, in vec2 c){
 
 void main( void )
 {
-  vec2 mouse = normalizeScreenCoords(u_mouse.xy) + 0.5;
-  vec2 coord = normalizeScreenCoords(gl_FragCoord.xy) * 0.7;
+  vec2 mouse = normalizeScreenCoords(u_mouse.xy);
+  vec2 coord = normalizeScreenCoords(gl_FragCoord.xy);
   coord += vec2(0.01,-0.01) * (mouse - 0.5);
 
   float t = u_time + 20.0;

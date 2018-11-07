@@ -1,5 +1,5 @@
-#define iterations 30
-#define power 2
+#define ITERATIONS 30
+#define POWER 2
 
 uniform vec2 iResolution;
 uniform vec4 iMouse;
@@ -99,9 +99,9 @@ vec2 normalizeScreenCoords(in vec2 coords){
 
 vec2 fractal(in vec2 z0, in vec2 c){
   vec2 z = z0;
-  for(int i = 0; i < iterations; i++){
+  for(int i = 0; i < ITERATIONS; i++){
     vec2 cz = z;
-    for(int j = 1; j < power; j++){
+    for(int j = 1; j < POWER; j++){
       cz = cp(cz,z);
     }
     z = cz + c;

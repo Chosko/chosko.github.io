@@ -1,11 +1,14 @@
 precision highp float;
 
+#define TILING 4.0
+
 uniform vec2 u_resolution;
 uniform float u_time;
+uniform vec2 u_mouse;
 
 vec2 transformScreenCoords(in vec2 coords){
   vec2 res = coords.xy - 0.5 * u_resolution;
-  return 2.0 * res / min(u_resolution.x, u_resolution.y);
+  return TILING * res / min(u_resolution.x, u_resolution.y);
 }
 
 float makePattern(vec2 uv, float sub){
@@ -21,8 +24,8 @@ float makePattern(vec2 uv, float sub){
 
 void main( void )
 {
-  vec2 uv = 1.768 * transformScreenCoords(gl_FragCoord.xy);
-  vec2 d = 1.256 * vec2(sin(u_time), cos(u_time));
+  vec2 uv = transformScreenCoords(gl_FragCoord.xy);
+  vec2 d = transformScreenCoords(u_mouse);
   d = normalize(uv - d);
   uv -= d * sin(u_time * 0.1278624);
   uv = abs(fract(uv) * 2.0 - 1.0);
