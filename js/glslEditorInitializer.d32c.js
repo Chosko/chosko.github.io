@@ -1,1 +1,0 @@
-var editorContainer=$("#glsl-editor-0");const glslEditor=new GlslEditor("#glsl-editor-0",{canvas_size:editorContainer.innerWidth(),canvas_draggable:!1,theme:"monokai",multipleBuffers:!0,watchHash:!0,fileDrops:!0,menu:!1});var fragName=editorContainer.data("fragment");$.ajax(fragName,{method:"GET",success:function(a){glslEditor.open(a)}});
