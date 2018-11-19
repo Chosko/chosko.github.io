@@ -70,7 +70,7 @@ vec2 fractal(in vec2 z0, in vec2 c){
   return z;
 }
 
-void main( void )
+void main()
 {
   vec2 mouse = normalizeScreenCoords(u_mouse.xy);
   vec2 coord = normalizeScreenCoords(gl_FragCoord.xy);

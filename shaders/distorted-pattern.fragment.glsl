@@ -22,7 +22,7 @@ float makePattern(vec2 uv, float sub){
   return pattern;
 }
 
-void main( void )
+void main()
 {
   vec2 uv = transformScreenCoords(gl_FragCoord.xy);
   vec2 d = transformScreenCoords(u_mouse);
