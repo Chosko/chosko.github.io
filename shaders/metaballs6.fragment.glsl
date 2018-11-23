@@ -4,7 +4,7 @@ precision highp float;
 #define THRESHOLDS vec2(0.670,1.0)
 #define POWERS vec2(0.4, 4.0)
 #define TRANSFER vec2(1.0, 0.3)
-#define LEVELS 5.0
+#define LEVELS vec2(1.0, 255.0)
 
 #define TWOPI 6.28318530718
 
@@ -33,6 +33,7 @@ void main() {
   vec3 thresholds = mix(THRESHOLDS.xxx, THRESHOLDS.yyy, t);
   vec3 powers = mix(POWERS.xxx, POWERS.yyy, t);
   vec3 transfer = mix(TRANSFER.xxx, TRANSFER.yyy, t);
+  float levels = mix(LEVELS.x, LEVELS.y, 1.0 - pow(0.5 * (sin(u_time * 0.4) + 1.0), 0.03));
 
   meta.x = fn(uv, 2.5 * vec2(sin(u_time), cos(u_time)), powers.x);
   meta.y = fn(uv, 1.3 * vec2(cos(u_time), sin(u_time)), powers.y);
@@ -46,7 +47,7 @@ void main() {
       dot(meta.zxy, transfer)
   );
 
-  meta = floor(LEVELS * meta) / LEVELS;
+  meta = floor(levels * meta) / levels;
 
   gl_FragColor = vec4(vec3(meta.rgb), 1.0);
 }

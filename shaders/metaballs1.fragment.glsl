@@ -18,7 +18,7 @@ float fn(in vec2 uv, in vec2 p) {
   return 1.0 / dot(uv, uv);
 }
 
-void main(void) {
+void main() {
   float meta = 0.0;
 
   vec2 uv = transformScreenCoords(gl_FragCoord.xy);
