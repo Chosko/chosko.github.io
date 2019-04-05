@@ -7,6 +7,9 @@ uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
 
+vec3 color1 = vec3(0.940,0.636,0.285);
+vec3 color2 = vec3(0.056,1.000,0.367);
+
 vec3 _pseudo_step ( vec4 a, vec4 b, float t)
 {
   vec3 color = vec3(0.0,0.0,0.0);
@@ -80,11 +83,13 @@ void main()
 
   float t = u_time + 20.0;
   vec2 params =
-    0.005 * vec2(sin(t * 2.0),cos(t * 2.0)) +
-    vec2(-0.20, 0.70) +
-    vec2(sin(t * 0.26), cos(t * 0.2)) * vec2(0.02,-0.1) +
-    mouse * 0.1;
-  vec2 julia = fractal(coord, params, 2.0);
-  // vec2 mandelbrot = fractal(vec2(0.0), coord);
-  gl_FragColor = vec4(pseudo(julia.y, 0.0, 1.0), 1.0);
+    0.1 * vec2(sin(t * 2.0),cos(t * 2.0)) +
+    vec2(sin(t * 0.26), cos(t * 0.2)) * vec2(0.500,-0.370) +
+    mouse * 0.5;
+  vec2 julia = fractal(params, coord, 2.0);
+
+  vec3 color = smoothstep(vec3(0.0), color1, pow(vec3(julia.x), vec3(1.0)));
+	color += pseudo(julia.y, 0.0, 1.0);
+
+  gl_FragColor = vec4(color, 1.0);
 }
