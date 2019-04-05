@@ -1,4 +1,4 @@
-#define ITERATIONS 30
+#define ITERATIONS 100
 #define POWER 2
 
 uniform vec2 iResolution;
@@ -6,123 +6,51 @@ uniform vec4 iMouse;
 uniform float iTime;
 uniform float iScroll;
 
-vec3 _pseudo_step ( vec4 a, vec4 b, float t)
-{
-  vec3 color = vec3(0.0,0.0,0.0);
-  if(t >= a.a && t < b.a)
-  {
-    float s = step(0.5,(t - a.a) / (b.a - a.a));
-    color = s * a.rgb + (1.0 - s) * b.rgb;
-  }
-  return color;
-}
+vec3 color1 = vec3(0.940,0.636,0.285);
+vec3 color2 = vec3(0.056,1.000,0.367);
 
-vec3 pseudo_symmetric ( float intensity, float center, float radius)
-{
-  vec3 color = vec3(0.0,0.0,0.0);
-
-  vec4 cm5 = vec4(0.0,0.1,0.5,0.0);
-  vec4 cm4 = vec4(0.0,0.0,1.0,0.1);
-  vec4 cm3 = vec4(0.0,1.0,1.0,0.2);
-  vec4 cm2 = vec4(0.0,1.0,0.0,0.3);
-  vec4 cm1 = vec4(1.0,1.0,0.0,0.4);
-  vec4 c0 = vec4(0.0,0.0,0.0,0.5);
-  vec4 c1 = vec4(0.0,0.0,1.0,0.6);
-  vec4 c2 = vec4(1.0,0.0,1.0,0.7);
-  vec4 c3 = vec4(1.0,0.0,0.0,0.8);
-  vec4 c4 = vec4(1.0,1.0,0.0,0.9);
-  vec4 c5 = vec4(1.0,1.0,1.0,1.0);
-
-  float min = center - radius;
-  float max = center + radius;
-
-  if(intensity < min){
-    return cm5.rgb;
-  }
-  if(intensity >= max){
-    return c5.rgb;
-  }
-
-  float i = clamp((intensity - min) / (max - min), 0.0, 1.0);
-  color = color + _pseudo_step(cm5,cm4,i);
-  color = color + _pseudo_step(cm4,cm3,i);
-  color = color + _pseudo_step(cm3,cm2,i);
-  color = color + _pseudo_step(cm2,cm1,i);
-  color = color + _pseudo_step(cm1,c0,i);
-  color = color + _pseudo_step(c0,c1,i);
-  color = color + _pseudo_step(c1,c2,i);
-  color = color + _pseudo_step(c2,c3,i);
-  color = color + _pseudo_step(c3,c4,i);
-  color = color + _pseudo_step(c4,c5,i);
-  return color;
-}
-
-// =============================================
-vec3 pseudo ( float intensity, float min, float max )
-{
-  vec3 color = vec3(0.0,0.0,0.0);
-  vec4 c0 = vec4(0.86, 0.15, 0.11, 0.0);
-  vec4 c1 = vec4(0.88, 0.36, 0.14, 0.2);
-  vec4 c2 = vec4(0.94, 0.73, 0.19, 0.4);
-  vec4 c3 = vec4(0.11, 0.69, 0.56, 0.6);
-  vec4 c4 = vec4(0.07, 0.25, 0.36, 0.8);
-  vec4 c5 = vec4(0.07, 0.07, 0.07, 1.0);
-
-  if(intensity < min){
-    return c0.rgb;
-  }
-  if(intensity >= max){
-    return c5.rgb;
-  }
-
-  float i = clamp((intensity - min) / (max - min), 0.0, 1.0);
-  color = color + _pseudo_step(c0,c1,i);
-  color = color + _pseudo_step(c1,c2,i);
-  color = color + _pseudo_step(c2,c3,i);
-  color = color + _pseudo_step(c3,c4,i);
-  color = color + _pseudo_step(c4,c5,i);
-  return color;
-}
-
-// complex product
-vec2 cp(in vec2 a, in vec2 b){
-  return vec2(
-    a.x * b.x - a.y * b.y,
-    a.x * b.y + a.y * b.x
-  );
-}
-
-vec2 normalizeScreenCoords(in vec2 coords){
-  vec2 res = coords.xy - 0.5 * iResolution.xy;
+vec2 transformScreenCoords(in vec2 coords){
+  vec2 res = coords.xy - 0.5 * iResolution;
   return 2.0 * res / min(iResolution.x, iResolution.y);
 }
 
-vec2 fractal(in vec2 z0, in vec2 c){
-  vec2 z = z0;
-  for(int i = 0; i < ITERATIONS; i++){
-    vec2 cz = z;
-    for(int j = 1; j < POWER; j++){
-      cz = cp(cz,z);
-    }
-    z = cz + c;
+vec2 cp (in vec2 a, in vec2 b)
+{
+  return vec2(a.x * b.x - a.y * b.y, a.x * b.y + b.x * a.y);
+}
+
+vec2 fractal (in vec2 z, in vec2 c, float extents)
+{
+  int maxIterations = 0;
+  for (int i = 0; i < ITERATIONS; i++)
+  {
+    maxIterations++;
+    z = cp(z, z) + c;
+    if (i >= ITERATIONS || length(z) >= extents)
+      break;
   }
-  return z;
+
+  if (maxIterations < ITERATIONS)
+    return vec2(float(maxIterations) / float(ITERATIONS), 0);
+  else
+    return vec2(0.0, abs(floor(z * float(ITERATIONS)) / float(ITERATIONS)));
 }
 
 void main()
 {
-  vec2 mouse = normalizeScreenCoords(iMouse.xy) + 0.5;
-  vec2 coord = normalizeScreenCoords(gl_FragCoord.xy) * 0.7;
+  vec2 mouse = transformScreenCoords(iMouse.xy);
+  vec2 coord = transformScreenCoords(gl_FragCoord.xy);
   coord += vec2(0.01,-0.01) * (mouse - 0.5);
 
   float t = iTime + 20.0;
   vec2 params =
     0.005 * vec2(sin(t * 2.0),cos(t * 2.0)) +
-    vec2(-0.20, 0.70) +
+    vec2(-0.30, 0.80) +
     vec2(sin(t * 0.26), cos(t * 0.2)) * vec2(0.02,-0.1) +
     mouse * 0.1;
   params = mix(params,vec2(0.0,0.0),max(1.0/(1.0 + (iTime * iTime * iTime * 0.04)), iScroll / iResolution.y));
-  vec2 julia = fractal(coord, params);
-  // vec2 mandelbrot = fractal(vec2(0.0), coord);
-  gl_FragColor = vec4(pseudo(length(julia), 0.0, 1.0), 1.0);
+  vec2 julia = fractal(coord, params, 5.0);
+  vec3 color = smoothstep(vec3(0.0), color1, pow(vec3(julia.x), vec3(clamp(length(params * 1.5), 0.6, 1.0))));
+
+  gl_FragColor = vec4(color, 1.0);
 }
