@@ -11,7 +11,7 @@ uniform float u_time;
 #define DIFF        0.0001
 #define ITERATIONS  256
 #define BOUNCES     2
-#define DISPLACEMENT 0.1
+#define DISPLACEMENT 0.15
 #define TIME        u_time
 
 #define MATSPHERE   0.0
@@ -35,7 +35,7 @@ vec2 coords (in vec2 c) {
 //  t -> tile index
 void opTile (vec3 p, vec3 t, out vec3 d, out vec3 i) {
   d = p / t;
-  i = floor (d);
+  i = d;
   d = fract (d) * t - t * 0.5;
 }
 
@@ -66,13 +66,13 @@ float tiledGround (vec3 p, vec3 tiling, float cycle) {
 
   opTile (p, tiling, d, t);
   d = vec3(d.x, p.y + 1.4, d.z);
-  return roundBox (d, vec3(0.19, 0.4 + max(-cos(0.3 + cycle * 0.1) + 0.5, 0.0) * DISPLACEMENT * (sin(cycle * 1.0 + t.x) + cos(cycle * 0.9 + t.z)), 0.19), 0.005);
+  return roundBox (d, vec3(0.19, 0.4 + max(-cos(0.3 + cycle * 0.1) + 0.5, 0.0) * DISPLACEMENT * (sin(cycle * 1.0 + t.x) - cos(cycle * 0.9 + t.z)), 0.19), 0.005);
 }
 
 // Map the whole scene using signed distance fields. It returns
 // x -> distance from closest object
 // y -> material ID
-vec2 map (in vec3 pos) {
+vec2 scene (in vec3 pos) {
   vec2 res = vec2(MAXDIST, -1.0);
 
   float d = sphere (pos - vec3(0.0, 0.0, 0.0), 1.0);
@@ -119,7 +119,7 @@ vec3 march (in vec3 ro, in vec3 rd) {
   vec3 res = vec3(0.1, -1.0, 0.0);
 
   for (int i = 0; i < ITERATIONS; i++) {
-    vec2 m = map(ro + rd * res.x);
+    vec2 m = scene(ro + rd * res.x);
 
     res.x += m.x;
     res.y = m.y;
@@ -140,9 +140,9 @@ vec3 calcNormal (in vec3 pos) {
   vec3 diff = vec3(0.0, DIFF, -DIFF);
   return normalize(vec3
   (
-    map (pos + diff.yxx).x - map(pos + diff.zxx).x,
-    map (pos + diff.xyx).x - map(pos + diff.xzx).x,
-    map (pos + diff.xxy).x - map(pos + diff.xxz).x
+    scene (pos + diff.yxx).x - scene(pos + diff.zxx).x,
+    scene (pos + diff.xyx).x - scene(pos + diff.xzx).x,
+    scene (pos + diff.xxy).x - scene(pos + diff.xxz).x
   ));
 }
 
