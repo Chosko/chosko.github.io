@@ -7,7 +7,7 @@ uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
 
-#define POINTS          5
+#define POINTS 5
 
 // screen coords to uv
 vec2 coords (in vec2 c) {
@@ -37,7 +37,7 @@ void main() {
     points[2] = vec2(-0.5, 0.0) + rotation * vec2(-0.1, 0.4);
     points[3] = vec2( 0.0, 0.5) + rotation * vec2(0.3, -0.15);
     points[4] = mouse;
-    
+
     float df = voronoi (points, uv);
 
     vec3 color = vec3(df);

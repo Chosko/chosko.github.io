@@ -3,13 +3,13 @@
     precision mediump float;
 #endif
 
+#define EDGE_THICKNESS vec2(0.01)
+#define TILING         (8.0 * (1.2 - cos(u_time * 0.2)))
+#define RANDOMIZE      (0.5 * sin (u_time * 0.3) + 0.5)
+
 uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
-
-vec2  EDGE_THICKNESS = vec2(0.01); 
-float TILING         = (8.0 * (1.2 - cos(u_time * 0.2)));
-float RANDOMIZE      = (0.5 * sin (u_time * 0.3) + 0.5);
 
 vec2 rand(in vec2 v) {
     v += vec2(123456);
@@ -24,7 +24,7 @@ vec4 coords (in vec2 c) {
 
 vec4 voronoiColored (in vec4 uv, in vec4 mouse) {
     float dist = distance (mouse.xy + mouse.zw, uv.xy + uv.zw);
-    vec3 color = vec3(0.7255, 0.2314, 0.0314);
+    vec3 color = vec3(0.965,0.904,0.012);
     vec4 result = vec4(color, dist);
     float isMin = 0.0;
     for (int i = -1; i <= 1; i++){
@@ -36,8 +36,8 @@ vec4 voronoiColored (in vec4 uv, in vec4 mouse) {
             color = vec3(random.xy, random.x + random.y);
 
             isMin = float(dist < result.w);
-            result = isMin * vec4(color, dist) + (1.0 - isMin) * result; 
-            
+            result = isMin * vec4(color, dist) + (1.0 - isMin) * result;
+
             dist = min (dist, distance (point, uv.xy));
         }
     }
@@ -62,6 +62,6 @@ void main() {
 
     vec4 v = voronoiEdgesColored (uv, mouse);
     v.xyz = mix(v.xyz * 0.5, v.xyz, v.w);
-    
+
     gl_FragColor = vec4(v.xyz, 1.0);
 }

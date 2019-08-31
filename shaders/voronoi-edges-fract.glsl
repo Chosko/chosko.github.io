@@ -3,13 +3,13 @@
     precision mediump float;
 #endif
 
+#define EDGE_THICKNESS vec2(0.01)
+#define TILING         (8.0 * (1.2 - cos(u_time * 0.2)))
+#define RANDOMIZE      (0.5 * sin (u_time * 0.3) + 0.5)
+
 uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
-
-vec2  EDGE_THICKNESS = vec2(0.01); 
-float TILING         = (8.0 * (1.2 - cos(u_time * 0.2)));
-float RANDOMIZE      = (0.5 * sin (u_time * 0.3) + 0.5);
 
 vec2 rand(in vec2 v) {
     return fract(sin(vec2(dot(v,vec2(127.1,311.7)),dot(v,vec2(269.5,183.3))))*43758.5453);
@@ -51,6 +51,6 @@ void main() {
     vec4 mouse = coords (u_mouse.xy);
 
     float v = voronoiEdges (uv, mouse);
-    
+
     gl_FragColor = vec4(v, v, v, 1.0);
 }
