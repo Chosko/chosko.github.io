@@ -176,3 +176,16 @@ ul.highlight li:before {
 li.mb5 {
   margin-bottom: 5px;
 }
+
+.resume-wrapper {
+  page-break-after: avoid;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+section:last-child{
+  page-break-inside: avoid;
+  page-break-after: avoid;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}

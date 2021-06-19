@@ -12,7 +12,7 @@ uniform vec2 u_mouse;
 uniform float u_time;
 
 vec2 rand(in vec2 v) {
-    v += vec2(123456);
+    v += vec2(1234.0);
     return fract(sin(vec2(dot(v,vec2(127.1,311.7)),dot(v,vec2(269.5,183.3))))*43758.5453);
 }
 
