@@ -82,7 +82,7 @@ header {
 
 }
 
-@-webkit-keyframes wiggle {
+/* @-webkit-keyframes wiggle {
   0%   {
     transform: rotate(0deg);
   }
@@ -95,16 +95,16 @@ header {
   100% {
     transform: rotate(0deg);
   }
-}
+} */
 
-.pic:hover {
-  /*Webkit fix*/
+/* .pic:hover {
+  Webkit fix
   -webkit-transform: translateZ(0);
 
   cursor:pointer;
 
   -webkit-animation: wiggle 0.7s cubic-bezier(0.6, -0.28, 0.735, 0.045);
-}
+} */
 
 .header-text {
   margin-top:0.5em;

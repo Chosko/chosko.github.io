@@ -1,9 +1,9 @@
 
 /**https://css-tricks.com/snippets/css/print-url-after-links/*/
 @media print{
-  a:not(.printhidden):after {
+  /* a:not(.printhidden):after {
     content:" (" attr(href) ") ";font-size:0.8em;font-weight:normal;
-  }
+  } */
 
   /**
    * https://www.lockedowndesign.com/chrome-print-preview-differs-from-dev-tools/
@@ -21,10 +21,6 @@ body, html {
   padding-top: 1.5em;
   font-size: 16px;
   color:black;
-}
-
-body.phantomjs{
-  font-size: 16px;
 }
 
 .content-cat {
