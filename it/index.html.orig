@@ -132,12 +132,10 @@
     <div class="row" style="min-height: 465px;">
     
       
-    
-      
-        <div class="col-md-6 category hover-target computer_graphics" data-hover-target="featurette-image-1">
+        <div class="col-md-6 category hover-target computer_graphics" data-hover-target="featurette-image-0">
           <div class="post-container normalink" data-url="/it/computer_graphics/cellular-noise.html#content-top">
             
-              <img id="featurette-image-1" class="featurette-image img-responsive" src="/img/post/cellular-noise.png" alt="">
+              <img id="featurette-image-0" class="featurette-image img-responsive" src="/img/post/cellular-noise.png" alt="">
             
 
             <div class="summary">
@@ -155,10 +153,14 @@
       
     
       
-        <div class="col-md-6 category hover-target computer_graphics" data-hover-target="featurette-image-2">
+    
+      
+    
+      
+        <div class="col-md-6 category hover-target computer_graphics" data-hover-target="featurette-image-3">
           <div class="post-container normalink" data-url="/it/computer_graphics/signed-distance-fields.html#content-top">
             
-              <img id="featurette-image-2" class="featurette-image img-responsive" src="/img/post/signed-distance-fields.png" alt="">
+              <img id="featurette-image-3" class="featurette-image img-responsive" src="/img/post/signed-distance-fields.png" alt="">
             
 
             <div class="summary">
@@ -173,8 +175,6 @@
             </div>
           </div>
         </div>
-      
-    
       
     
       
@@ -201,12 +201,10 @@
       
     
       
-    
-      
-        <div class="col-md-6 category hover-target computer_graphics" data-hover-target="featurette-image-7">
+        <div class="col-md-6 category hover-target computer_graphics" data-hover-target="featurette-image-6">
           <div class="post-container normalink" data-url="/it/computer_graphics/dots-shader.html#content-top">
             
-              <img id="featurette-image-7" class="featurette-image img-responsive" src="/img/post/dots.png" alt="">
+              <img id="featurette-image-6" class="featurette-image img-responsive" src="/img/post/dots.png" alt="">
             
 
             <div class="summary">
@@ -226,10 +224,10 @@
       
     
       
-        <div class="col-md-6 category hover-target computer_graphics" data-hover-target="featurette-image-9">
+        <div class="col-md-6 category hover-target computer_graphics" data-hover-target="featurette-image-8">
           <div class="post-container normalink" data-url="/it/computer_graphics/playing-with-backbuffer.html#content-top">
             
-              <img id="featurette-image-9" class="featurette-image img-responsive" src="/img/post/trails.png" alt="">
+              <img id="featurette-image-8" class="featurette-image img-responsive" src="/img/post/trails.png" alt="">
             
 
             <div class="summary">
@@ -247,10 +245,14 @@
       
     
       
-        <div class="col-md-6 category hover-target computer_graphics" data-hover-target="featurette-image-10">
+    
+      
+    
+      
+        <div class="col-md-6 category hover-target computer_graphics" data-hover-target="featurette-image-11">
           <div class="post-container normalink" data-url="/it/computer_graphics/distorted-pattern-shader.html#content-top">
             
-              <img id="featurette-image-10" class="featurette-image img-responsive" src="/img/post/distorted-pattern-shader.png" alt="">
+              <img id="featurette-image-11" class="featurette-image img-responsive" src="/img/post/distorted-pattern-shader.png" alt="">
             
 
             <div class="summary">
@@ -265,8 +267,6 @@
             </div>
           </div>
         </div>
-      
-    
       
     
       
@@ -293,10 +293,12 @@
       
     
       
-        <div class="col-md-6 category hover-target computer_graphics" data-hover-target="featurette-image-14">
+    
+      
+        <div class="col-md-6 category hover-target computer_graphics" data-hover-target="featurette-image-15">
           <div class="post-container normalink" data-url="/it/computer_graphics/fractal-shader.html#content-top">
             
-              <img id="featurette-image-14" class="featurette-image img-responsive" src="/img/post/fractal-shader.png" alt="">
+              <img id="featurette-image-15" class="featurette-image img-responsive" src="/img/post/fractal-shader.png" alt="">
             
 
             <div class="summary">
@@ -316,10 +318,10 @@
       
     
       
-        <div class="col-md-6 category hover-target video_games" data-hover-target="featurette-image-16">
+        <div class="col-md-6 category hover-target video_games" data-hover-target="featurette-image-17">
           <div class="post-container normalink" data-url="/it/video_games/lazy.html#content-top">
             
-              <img id="featurette-image-16" class="featurette-image img-responsive" src="/img/post/lazy.png" alt="">
+              <img id="featurette-image-17" class="featurette-image img-responsive" src="/img/post/lazy.png" alt="">
             
 
             <div class="summary">
@@ -334,8 +336,6 @@
             </div>
           </div>
         </div>
-      
-    
       
     
       
@@ -362,10 +362,12 @@
       
     
       
-        <div class="col-md-6 category hover-target video_games" data-hover-target="featurette-image-20">
+    
+      
+        <div class="col-md-6 category hover-target video_games" data-hover-target="featurette-image-21">
           <div class="post-container normalink" data-url="/it/video_games/scrollcraft.html#content-top">
             
-              <img id="featurette-image-20" class="featurette-image img-responsive" src="/img/post/scrollcraft.png" alt="">
+              <img id="featurette-image-21" class="featurette-image img-responsive" src="/img/post/scrollcraft.png" alt="">
             
 
             <div class="summary">
@@ -383,14 +385,10 @@
       
     
       
-    
-      
-    
-      
-        <div class="col-md-6 category hover-target video_games" data-hover-target="featurette-image-23">
+        <div class="col-md-6 category hover-target video_games" data-hover-target="featurette-image-22">
           <div class="post-container normalink" data-url="/it/video_games/upto100.html#content-top">
             
-              <img id="featurette-image-23" class="featurette-image img-responsive" src="/img/post/up-to-100.png" alt="">
+              <img id="featurette-image-22" class="featurette-image img-responsive" src="/img/post/up-to-100.png" alt="">
             
 
             <div class="summary">
@@ -410,10 +408,10 @@
       
     
       
-        <div class="col-md-6 category hover-target other" data-hover-target="featurette-image-25">
+        <div class="col-md-6 category hover-target other" data-hover-target="featurette-image-24">
           <div class="post-container normalink" data-url="/it/other/chosko.html#content-top">
             
-              <img id="featurette-image-25" class="featurette-image img-responsive" src="/img/post/chosko.png" alt="">
+              <img id="featurette-image-24" class="featurette-image img-responsive" src="/img/post/chosko.png" alt="">
             
 
             <div class="summary">
@@ -428,6 +426,8 @@
             </div>
           </div>
         </div>
+      
+    
       
     
     </div>
